@@ -24,3 +24,4 @@ while ans != "c":
 print("Game over. Your secret number was: " + str(guess))
     
 #asdejnahuj
+#patsejnahuj
