@@ -1,8 +1,6 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Mar 19 19:00:40 2020
+import numpy as np
 
-@author: User
-"""
-
-#uzvareet
+empty_base = np.zeros(shape=(8,8))
+print(empty_base)
+empty_base[2,2] = 3
+print(empty_base)
