@@ -1,8 +1,9 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Mar 19 19:00:59 2020
+import selenium as sl
 
-@author: User
-"""
 
-# open browser, open sudoku.com, be at 1 1 cell
+
+driver = sl.webdriver.Chrome()
+driver.get("http://www.sudoku.com")
+
+firstcell = driver.find_element_by_xpath("//tr[td='game-cell']//a[@href]")
+firstcell.click()
