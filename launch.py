@@ -6,7 +6,8 @@ from selenium.webdriver.support import expected_conditions as EC
 driver = webdriver.Chrome()
 driver.get("http://www.sudoku.com")
 
-
 wait = WebDriverWait(driver, 10)
 element = wait.until(EC.element_to_be_clickable((By.ID, 'game')))
 
+newgame = driver.find_element_by_class_name("button.new-game-button")
+newgame.click()
