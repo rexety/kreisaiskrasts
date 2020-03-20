@@ -12,7 +12,7 @@ for i in range(1,10):
     keys.append(i)
 vectordic = dict.fromkeys(keys)
 
-f = open("vectorpaths.txt", "r")
+f = open("vectorpaths.txt").read().splitlines()
 
 temp = 1
 for x in f:
@@ -21,7 +21,6 @@ for x in f:
     if temp == 10:
         break
     
-f.close() 
     
 
 driver = webdriver.Chrome()
@@ -47,7 +46,6 @@ for row in range(1,10):
         if cellvar == "game-cell":
             empty_base[row-1,cell-1] = 0
         else:
-            #empty_base[row-1,cell-1] = 1
             paths = matrixcell.find_elements_by_css_selector("path")
             for path in paths:
                 value = path.get_attribute("d") 
@@ -56,6 +54,5 @@ for row in range(1,10):
                     empty_base[row-1,cell-1] = keys
                     value = ""
             
-  
 print(empty_base)
 
