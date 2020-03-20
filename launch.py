@@ -1,9 +1,8 @@
-import selenium as sl
+from selenium import webdriver
 
 
-
-driver = sl.webdriver.Chrome()
+driver = webdriver.Chrome()
 driver.get("http://www.sudoku.com")
 
-firstcell = driver.find_element_by_xpath("//tr[td='game-cell']//a[@href]")
-firstcell.click()
+#firstcell = driver.find_element_by_xpath("//tr[td='game-cell']//a[@href]")
+#firstcell.click()
