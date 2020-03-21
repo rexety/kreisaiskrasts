@@ -26,7 +26,7 @@ for x in f:
         break
 
 #open browser & wait until loaded
-driver = webdriver.Chrome(executable_path=r"C:\Python\chromedriver.exe")
+driver = webdriver.Chrome()
 driver.get("http://www.sudoku.com/easy/")
 
 wait = WebDriverWait(driver, 10)
@@ -48,7 +48,7 @@ for row in range(1,10):
                 if values == web_value:
                     output[row-1,cell-1] = keys   
    
-print(output)
+#print(output)
 
 ##solve with function from the strategy file --- HOW IT SHOULD WORK
 #import strategy
@@ -63,4 +63,4 @@ print(output)
 
 t1 = time.time()
 total = t1-t0
-print(total)
+#print(total)
