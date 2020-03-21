@@ -2,7 +2,7 @@ import numpy as np
 
 class Sudoku():
     
-    def solve():
+    def solve(array?):
         plz strategy
 
 output = Sudoku
