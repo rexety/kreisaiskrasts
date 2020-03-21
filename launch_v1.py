@@ -26,11 +26,12 @@ for x in f:
         break
 
 #open browser & wait until loaded
-driver = webdriver.Chrome()
+driver = webdriver.Chrome(executable_path=r"C:\Python\chromedriver.exe")
 driver.get("http://www.sudoku.com/easy/")
 
 wait = WebDriverWait(driver, 10)
 element = wait.until(EC.element_to_be_clickable((By.ID, 'game')))
+
 
 #read table into an ndarray
 for row in range(1,10):  
@@ -54,10 +55,10 @@ print(output)
 #solve(output) 
 
 
-#input
-newgame = driver.find_element_by_class_name("game-cell")
-newgame.click()
-newgame.send_keys(Keys.ARROW_DOWN)
+# #input
+# newgame = driver.find_element_by_class_name("game-cell")
+# newgame.click()
+# newgame.send_keys(Keys.ARROW_DOWN)
 
 
 t1 = time.time()

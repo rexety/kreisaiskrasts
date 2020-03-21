@@ -1,11 +1,13 @@
 import numpy as np
+from launch_v1 import output
 
-class Sudoku():
+print(output)
+# class Sudoku():
     
-    def solve(array?):
-        plz strategy
+#     def solve(array?):
+#         plz strategy
 
-output = Sudoku
+# output = Sudoku
 
-output.solve()
+# output.solve()
 
