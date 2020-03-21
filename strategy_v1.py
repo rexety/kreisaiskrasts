@@ -1,11 +1,22 @@
 import numpy as np
 
-class Sudoku():
+example = np.load('example_v1.npy')
+
+
+def fill(array):
     
-    def solve(array?):
-        plz strategy
+    for i, r in enumerate(array):
+        for j, c in enumerate(r):
+            if c == 0:
+                array[i,j] = np.random.randint(low = 1, high = 9)
+                
+    return array
+    
 
-output = Sudoku
+random_array = fill(example)
 
-output.solve()
+print("Before:")
+print(example)
 
+print("After:")
+print(random_array)
