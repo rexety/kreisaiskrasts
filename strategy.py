@@ -1,19 +1,19 @@
 import numpy as np
 #from launch import output
 
-#function row number does not match
-#function column number does not match
-#function field does not match
+# load given sudoku field and rename it to rows
 example = np.load('example.npy')
 rows = example
 
-
+# manipulate given matrix so that columns are in rows
 columns = np.rot90(example)
 columns = np.flip(columns, 0)
 
 
-tempfield = np.array([])
 
+
+# outputs 3x3 sudoku fields in rows from given 9x9 sudoku matrix
+tempfield = np.array([])
 temp = 0
 for x in range(0,9,3):
      y = x + 3
@@ -23,7 +23,15 @@ for x in range(0,9,3):
          tempfield = np.append(tempfield,example[x:y, i:temp])
                                                          
 fields = np.reshape(tempfield,(9,9))
-  
+
+
+
+print(rows)
+print(columns)
+print(fields)
+
+
+
 """
 we got 3 arrays - row, column, fields
 
@@ -37,44 +45,43 @@ not have a matching number
 
 def rowcheck(number,row):
     """
-    pohuj
+    checks if given int is in the selected row
 
     """
     return number in rows[row]
 
 def columncheck(number,column):
     """
-    pohuj
+    checks if given int is in the selected column
 
     """
     return number in columns[column]
 
 def fieldcheck(number,field):
     """
-    gl bleg
+    checks if given int is in the selected field
     """
 
 
 
-print(columncheck(2, 2))
 
 
 
-rowy = -1
-coly = -1
-
+rowy = -1 # counts which row it is with an int
+coly = -1 # counts which column it is with an int
 for rowx in example:
     rowy += 1
     for cellx in rowx:
         coly += 1
         if cellx == 0:
             for i in range(1,9):
-                if rowcheck(i,rowy) == True and columncheck(i,coly) == True:
-                    print("wat")
+                if rowcheck(i,rowy) == True and columncheck(i,coly) == True: #checks if int can be used in the free space according to sudoku rules
+                    break#print("wat")
                 coly = -1
                
                 
 """
+TO DO
 get fieldcheck working
 if int can be used put it into the big matrix
 what if the whole range is not usable and backtracking has to be used
