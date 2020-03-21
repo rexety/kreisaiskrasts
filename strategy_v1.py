@@ -1,22 +1,36 @@
 import numpy as np
 
-example = np.load('example_v1.npy')
+
+hints = np.load('example_v1.npy')
+
+randomized_game = np.zeros(shape=(9,9))
 
 
 def fill(array):
     
-    for i, r in enumerate(array):
-        for j, c in enumerate(r):
-            if c == 0:
-                array[i,j] = np.random.randint(low = 1, high = 9)
+    for i, row in enumerate(array):
+        for j, cell in enumerate(row):
+            if cell == 0:
+                randomized_game[i,j] = np.random.randint(low = 1, high = 9)
+            else:
+                randomized_game[i,j] = hints[i,j]
                 
-    return array
-    
+    return randomized_game
 
-random_array = fill(example)
+
+fill(hints)
+
+# def errors(array):
+    
+#     for row in array:
+        
+    
+    
+#def randomize errors
+
 
 print("Before:")
-print(example)
+print(hints)
 
 print("After:")
-print(random_array)
+print(randomized_game)
