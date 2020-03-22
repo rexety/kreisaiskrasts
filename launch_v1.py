@@ -12,7 +12,7 @@ t0 = time.time()
 f = open("vectorpaths.txt").read().splitlines()
 output = np.zeros(shape=(9,9))
 
-#cleaner dict solution possible?
+#dictionary: better solutions possible. array?
 keys = []
 for i in range(1,10):
     keys.append(i)
