@@ -3,7 +3,7 @@ import numpy as np
 import sys
 # load given sudoku field and rename it to rows
 rows = np.load('example.npy')
-
+memorycell = 0
 previous = 1
 # manipulate given matrix so that columns are in rows
 columns = np.rot90(rows)
@@ -91,46 +91,43 @@ def mistakechecker(number,row,column):
         return True
     return False
 
-def guessingalgo(row,col,cellix):
-    
-    global previous
-    if cellix == 0:
-        previous = 1
-    else:
-        previous = cellix
-    for guess in range(previous,10):
+def guessingalgo(row,col):
+    global rows
+    for guess in range(1,10):
+        if guess == memorycell:
+            continue
         if mistakechecker(guess,row,col):
             remember(row,col,guess)
             newmatrix(guess,row,col)
             print(rows)
             print("")            
         if rows[row][col] == guess:
+            atmina = 0
             break
         if guess == 9 and rows[row][col] != 9:
-            print("zhopix")
-            if cellix == 0:
-                previous = 1
-            else:
-                previous = memorycell
-            sys.exit() 
-            for guess in range(previous,10):
-                 
-                if mistakechecker(guess,row,col):
-                    remember(row,col,cellix)
-                    newmatrix(guess,row,col)
-                    print(rows)
-                    print("")
-    
-                if rows[row][col] == guess:
-                    break
-                if guess == 9 and rows[row][col] != 9:
-                    print("zhopix")
-                    sys.exit()
+            rows[memoryrow][memorycol] = 0
+            print(rows)
+            return False
+"""
 
+def solve(rows):
+    rowcounter = -1
+    columncounter = -1                 
+    for selectedrow in rows:
+        rowcounter += 1
+        for selectedcell in selectedrow:
+            columncounter += 1
+            if selectedcell == 0:
+                guessingalgo(rowcounter, columncounter)
+            
+        columncounter = -1
 
 
             
+solve(rows)
 
+"""
+counter = 4
 
 
 rowcounter = -1
@@ -142,12 +139,13 @@ for selectedrow in rows:
         columncounter += 1
             
         if selectedcell == 0:
-            guessingalgo(rowcounter, columncounter,selectedcell)
+            if guessingalgo(rowcounter, columncounter) == False:
+                sys.exit()
+                break
+
             
     columncounter = -1
 
 
-                
-  
                 
    
