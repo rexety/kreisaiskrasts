@@ -1,75 +1,106 @@
 import numpy as np
 
 
-#load the hint array and an empty one for random numbers
 hints = np.load('example_v1.npy')
-randomized_game = np.zeros(shape=(9,9))
 
-#fill empty spaces with random numbers
-def fill_randomly(array):
+
+def fill_randomly(hints):
     
-    for i, row in enumerate(array):
+    random_game = np.zeros(shape=(9,9))
+    
+    for i, row in enumerate(hints):
         for j, cell in enumerate(row):
             if cell == 0:
-                randomized_game[i,j] = np.random.randint(low = 1, high = 9)
+                # random_game[i,j] = np.random.randint(low = 1, high = 9)
+                random_game[i,j] = 1
             else:
-                randomized_game[i,j] = hints[i,j]
+                random_game[i,j] = hints[i,j]
                 
-    return randomized_game
+    return random_game
 
-fill_randomly(hints)
+random_game = fill_randomly(hints)
 
 
-#define rows, columns and squares
-rows = randomized_game
-
-columns = np.rot90(rows)
-columns = np.flip(columns, 0)
-
-tempfield = np.array([])
-temp = 0
-for x in range(0,9,3):
-      y = x + 3
-      for i in range(1,4):
-          temp = i * 3
-          i = temp - 3
-          tempfield = np.append(tempfield,randomized_game[x:y, i:temp])
-                                                         
-fields = np.reshape(tempfield,(9,9))
-
-#filter hints - make them the only positive values --- pagaidaam tikai pirmaa rinda lai nepistu galvu
-negatives = -randomized_game[0] + 2 * hints[0]
-
-print(negatives)
-
-#delete duplicates if hint exists --- IN PROGRESS
-for n in range(10):
+def rows(sudoku):
     
-    # if n in negatives:
-        # new_items = np.where(negatives == -n, 0, negatives) #straadaa tikai jaunaakajam iterationam
+    rows = sudoku
+    return rows
+    
+
+def cols(sudoku):
+    
+    rows = sudoku
+    columns = np.rot90(rows)
+    columns = np.flip(columns, 0)
+    return columns
+    
+
+def sects(sudoku): 
+    
+    tempfield = np.array([])
+    temp = 0
+    for x in range(0,9,3):
+          y = x + 3
+          for i in range(1,4):
+              temp = i * 3
+              i = temp - 3
+              tempfield = np.append(tempfield, sudoku[x:y, i:temp])
+                                                             
+    sectors = np.reshape(tempfield,(9,9))
+    
+    return sectors
+
+
+random_rows = rows(random_game)
+random_cols = cols(random_game)
+random_sects = sects(random_game)
+
+hint_rows = rows(hints)
+hint_cols = cols(hints)
+hint_sects = sects(hints)
+
+negative_rows = -random_rows + 2 * hint_rows
+negative_cols = -random_cols + 2 * hint_cols
+negative_sects = -random_sects + 2 * hint_sects
+
+print(negative_rows)
+print("")
+
+
+def remove_row_errors():
+
+    rowfix = np.zeros(shape=(9,9))
+    
+    for n in range(9):
+        rowfix[n] = np.around([0 if -i in hint_rows[n] else i for i in negative_rows[n]])
         
-        new_items = [-n if -n in negatives else n for n in negatives] #straadaa tikai ja visi/abi skaitlji ir rindaa asdejnahujble
+     #   rowfix[n] = [0 if np.count_nonzero(-rowfix[n] == n+1) > 1 else i for i in rowfix[n]]
+
+    return rowfix
+
+
+def remove_col_errors():
+    
+    fixed_rows = remove_row_errors()
+    colfix = cols(fixed_rows)
+    
+    for n in range(9):
+        colfix[n] = np.around([0 if -i in hint_cols[n] else i for i in colfix[n]])
+
+    return colfix.T
+
+
+def remove_sect_errors():
+    
+    fixed_rowcols = remove_col_errors()
+    sectfix = sects(fixed_rowcols)
+
+    for n in range(9):
+        sectfix[n] = np.around([0 if -i in hint_sects[n] else i for i in sectfix[n]])
         
-        # new_items = [0 if n in negatives else n for n in negatives]
-
-print(new_items)
+    return sectfix
 
 
-#
-# structure
-#
+asd = remove_col_errors()
 
-
-# def find_errors(array):
-    
-#     for row in rows:
-#         if
-        
-    
-    
-#def randomize errors():
-        # asd
-
-
-
-
+print(asd)

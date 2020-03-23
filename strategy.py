@@ -1,10 +1,10 @@
 import numpy as np
-from launch import output
+from launch_v1 import output
 import sys
 # load given sudoku field and rename it to rows
 
 
-#rows = np.load('example.npy')
+# rows = np.load('example.npy')
 rows = output
 
 # manipulate given matrix so that columns are in rows
@@ -71,7 +71,7 @@ def searchzero(matrix):
     print(" ")
     print(rows)
     sys.exit()
-
+    
 def guessing(matrix):                
     search = searchzero(matrix)
     row = search[0]

@@ -3,7 +3,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.chrome.options import Options
 import numpy as np
 import time
 
@@ -28,7 +27,7 @@ for x in f:
 
 #open browser & wait until loaded
 driver = webdriver.Chrome(executable_path=r"C:\Python\chromedriver.exe")
-driver.get("http://www.sudoku.com/easy/")
+driver.get("http://www.sudoku.com/hard/")
 
 wait = WebDriverWait(driver, 10)
 element = wait.until(EC.element_to_be_clickable((By.ID, 'game')))
@@ -49,7 +48,7 @@ for row in range(1,10):
                 if values == web_value:
                     output[row-1,cell-1] = keys   
    
-print(output)
+# print(output)
 
 ##solve with function from the strategy file --- HOW IT SHOULD WORK
 #import strategy
@@ -62,6 +61,6 @@ print(output)
 # newgame.send_keys(Keys.ARROW_DOWN)
 
 
-t1 = time.time()
-total = t1-t0
-print(total)
+# t1 = time.time()
+# total = t1-t0
+# print(total)
