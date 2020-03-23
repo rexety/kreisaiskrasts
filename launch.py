@@ -27,7 +27,7 @@ for x in f:
 
 #open browser & wait until loaded
 driver = webdriver.Chrome()
-driver.get("http://www.sudoku.com/easy/")
+driver.get("http://www.sudoku.com/hard/")
 
 wait = WebDriverWait(driver, 10)
 element = wait.until(EC.element_to_be_clickable((By.ID, 'game')))
