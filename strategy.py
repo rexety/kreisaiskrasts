@@ -1,5 +1,6 @@
 import numpy as np
-from launch_v1 import output
+from launch import output
+from launch import driver
 import sys
 # load given sudoku field and rename it to rows
 
@@ -23,6 +24,8 @@ for x in range(0,9,3):
                                                          
 fields = np.reshape(tempfield,(9,9))
 
+print("Starting matrix")
+print(" ")
 print(rows)
 
 
@@ -63,27 +66,29 @@ def mistakechecker(number,row,column):
 
 
 def searchzero(matrix):
+
     for row in range(len(matrix)):
         for cell in range(len(matrix)):
             if matrix[row][cell] == 0:
                 return row,cell
     print(" ")
+    print("idc")
+    print(matrix)
     print(" ")
-    print(rows)
-    sys.exit()
+    return False
     
-def guessing(matrix):                
+def guessing(matrix):
     search = searchzero(matrix)
-    row = search[0]
-    cell = search[1]
+    if search == False:
+        return True
+    else:
+        row = search[0]
+        cell = search[1]
     for guess in range(1,10):
         if mistakechecker(guess,row,cell) == True:
             matrix[row][cell] = guess
             if guessing(matrix):
-                return
-            else:
-                matrix[row][cell] = 0
+                return True
+            matrix[row][cell] = 0
+    return False
             
-            
-
-guessing(rows)
