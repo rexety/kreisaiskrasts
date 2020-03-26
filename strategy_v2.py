@@ -72,19 +72,18 @@ def fill(sudoku):
     # for n in range(1,10):
         while np.count_nonzero(abs(sudoku) == 9) != 9:
         
-            
             for i, row in enumerate(sudoku):
                 for j, cell in enumerate(row):
                     if cell == 0:
                         sudoku[i,j] = np.random.randint(low =-9, high = -1)
                     else:
-                        sudoku[i,j] = sudoku[i,j]
+                        # sudoku[i,j] = sects(fixed_sects(fixed_rows(fixed_cols(sudoku))))[i,j]
+                        sudoku = sects(fixed_sects(fixed_rows(fixed_cols(sudoku))))
                         
-            sudoku = sects(fixed_sects(fixed_rows(fixed_cols(sudoku))))
-            # n+=1
-            # print(n)
-            # print(sudoku)
-
+            # 
+            
+            print(abs(sudoku))
+            
         return abs(sudoku)
 
 print(fill(solution))
