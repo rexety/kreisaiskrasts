@@ -82,7 +82,7 @@ def fill(sudoku):
                         
             # 
             
-            print(abs(sudoku))
+            print((sudoku))
             
         return abs(sudoku)
 
@@ -91,7 +91,7 @@ print(fill(solution))
 '''
 ideas:
     
-    
+    a
 if not in row:
     if not in col:
         if not in sect:
